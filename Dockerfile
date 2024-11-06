@@ -2,7 +2,7 @@
 FROM golang:1.23 AS builder
 
 # Install Python3
-RUN apt-get update && apt-get install -y python3 && ln -s /usr/bin/python3 /usr/bin/python
+RUN apt-get update && apt-get install -y python && ln -s /usr/bin/python /usr/bin/python
 
 # Set the working directory for the Go app
 WORKDIR /app
