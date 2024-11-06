@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Backend/handlers"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -22,6 +23,8 @@ func enableCORS(w http.ResponseWriter, r *http.Request) {
 // Main function to set up the server
 func main() {
 	http.HandleFunc("/generate-image", generateImageHandler)
+	//http.HandleFunc("/epl-schedule", handlers.GetEPLSchedule)
+	http.HandleFunc("/api/epl-matches", handlers.GetMatches)
 	log.Println("Server started at :8080")
 	http.ListenAndServe(":8080", nil)
 }
