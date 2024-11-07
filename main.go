@@ -22,9 +22,18 @@ func enableCORS(w http.ResponseWriter, r *http.Request) {
 
 // Main function to set up the server
 func main() {
+	// Run the scraper logic manually (without HTTP context)
+	err := handlers.ScrapeAndSaveDataScraping()
+	if err != nil {
+		log.Println("Error in manual scrape:", err)
+	} else {
+		log.Println("Scraping test successful!")
+	}
+
+	// Set up routes
 	http.HandleFunc("/generate-image", generateImageHandler)
-	//http.HandleFunc("/epl-schedule", handlers.GetEPLSchedule)
-	http.HandleFunc("/api/epl-matches", handlers.GetMatches)
+	http.HandleFunc("/api/matches", handlers.ServeData)
+	http.HandleFunc("/scraper", handlers.ScrapeAndSaveData)
 	log.Println("Server started at :8080")
 	http.ListenAndServe(":8080", nil)
 }
